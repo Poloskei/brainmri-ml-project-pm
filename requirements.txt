@@ -4,4 +4,4 @@ pandas
 pydeck
 streamlit
 tensorflow
-opencv-python
+numpy opencv-python-headless
