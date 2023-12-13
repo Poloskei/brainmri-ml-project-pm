@@ -66,7 +66,7 @@ if __name__ == "__main__":
     kerasmodel = load_models()
     img = cv2.imread('Y1.jpg')
     st.image(img)
-    img = st.file_uploader("upload an image of ur brain", type=['jpg','jpeg'], accept_multiple_files=False,on_change=_process_image())
+    img = st.file_uploader("upload an image of ur brain", type=['jpg','jpeg'], accept_multiple_files=False,on_change=_process_image(img))
     img = _process_image(img)
 #    st.write("image uploaded")
     
