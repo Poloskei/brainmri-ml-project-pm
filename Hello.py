@@ -50,9 +50,7 @@ def _process_image(image):
   
 
 
-
 def __predict(image,model):
-    #image = __load_and_preprocess_custom_image(image)
     y_pred = model.predict(np.expand_dims(image, axis=0), verbose=1)[0] 
     y_pred_class = np.argmax(y_pred)
     y_pred_prob = y_pred[y_pred_class]*100 
@@ -66,8 +64,10 @@ if __name__ == "__main__":
     kerasmodel = load_models()
     img = cv2.imread('Y1.jpg')
     st.image(img)
-    img = st.file_uploader("upload an image of ur brain", type=['jpg','jpeg'], accept_multiple_files=False,on_change=_process_image(img))
+    uplpoaded_img = st.file_uploader("upload an image of ur brain", type=['jpg','jpeg'], accept_multiple_files=False)
+    if uplpoaded_img is not None:
+       img = uplpoaded_img
+       st.write("image uploaded")
+       st.image(img)
     img = _process_image(img)
-#    st.write("image uploaded")
-    
     st.write("keras: " +__predict(img,kerasmodel))
