@@ -41,9 +41,6 @@ def load_models():
   return model_keras
 
 def _process_image(image):
-  if image is None:
-     image = cv2.imread('Y1.jpg')
-  
   img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY ) 
   img = cv2.resize(img, (75, 75), interpolation=cv2.INTER_AREA)
   img = img / 255.0
@@ -52,12 +49,9 @@ def _process_image(image):
   return img
   
 
-def _load_custom_image():
-  img = st.file_uploader("upload an image of ur brain", type=['jpg','jpeg'], accept_multiple_files=False)
-  img = _process_image(img);
 
 
-def __predict_score(image,model):
+def __predict(image,model):
     #image = __load_and_preprocess_custom_image(image)
     y_pred = model.predict(np.expand_dims(image, axis=0), verbose=1)[0] 
     y_pred_class = np.argmax(y_pred)
@@ -70,7 +64,10 @@ if __name__ == "__main__":
     #st.sidebar.success("Select a demo above.")
 
     kerasmodel = load_models()
-    img = _process_image(None)
-    st.write("image uploaded")
+    img = cv2.imread('Y1.jpg')
     st.image(img)
-    st.write("keras: " +__predict_score(img,kerasmodel))
+    img = st.file_uploader("upload an image of ur brain", type=['jpg','jpeg'], accept_multiple_files=False,on_change=_process_image())
+    img = _process_image(img)
+#    st.write("image uploaded")
+    
+    st.write("keras: " +__predict(img,kerasmodel))
