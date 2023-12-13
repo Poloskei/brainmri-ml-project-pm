@@ -70,4 +70,4 @@ if __name__ == "__main__":
        st.write("image uploaded")
        st.image(img)
     img = _process_image(img)
-    st.write("keras: " +__predict(img,kerasmodel))
+    st.write("keras: ",__predict(img,kerasmodel))
