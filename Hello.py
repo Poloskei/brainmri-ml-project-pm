@@ -35,25 +35,30 @@ def run():
 
 
 
-#new_model = tf.keras.models.load_model('my_model.keras')
 def load_models():
   model_keras = load_model('models/keras_model.h5', compile=False)
   #model_auto = load_model('models/auto_model.h5', compile=False)
   return model_keras
 
-def __load_and_preprocess_custom_image():
-  img = st.file_uploader("upload an image of ur brain", type=['jpg','jpeg'], accept_multiple_files=False)
-  if img is not None:
-    img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY ) 
-    img = cv2.resize(img, (75, 75), interpolation=cv2.INTER_AREA)
-    img = img / 255.0
+def _process_image(image):
+  if image is None:
+     image = cv2.imread('Y1.jpg')
+  
+  img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY ) 
+  img = cv2.resize(img, (75, 75), interpolation=cv2.INTER_AREA)
+  img = img / 255.0
   #img = load_img(image_path, color_mode = 'grayscale', target_size = (700, 700))
   #img = img_to_array(img).astype('float32')/255
-    return img
-  return None
+  return img
+  
+
+def _load_custom_image():
+  img = st.file_uploader("upload an image of ur brain", type=['jpg','jpeg'], accept_multiple_files=False)
+  img = _process_image(img);
+
 
 def __predict_score(image,model):
-    image = __load_and_preprocess_custom_image(image)
+    #image = __load_and_preprocess_custom_image(image)
     y_pred = model.predict(np.expand_dims(image, axis=0), verbose=1)[0] 
     y_pred_class = np.argmax(y_pred)
     y_pred_prob = y_pred[y_pred_class]*100 
@@ -65,8 +70,7 @@ if __name__ == "__main__":
     #st.sidebar.success("Select a demo above.")
 
     kerasmodel = load_models()
-    img = __load_and_preprocess_custom_image()
-    if img is not None:
-      st.write("image uploaded")
-      st.image(img)
-      st.write("keras: " +__predict_score(img,kerasmodel))
+    img = _process_image(None)
+    st.write("image uploaded")
+    st.image(img)
+    st.write("keras: " +__predict_score(img,kerasmodel))
