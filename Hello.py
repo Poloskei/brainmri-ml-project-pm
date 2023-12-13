@@ -40,7 +40,7 @@ def load_models():
   #model_auto = load_model('models/auto_model.h5', compile=False)
   return model_keras
 
-def _process_image(image):
+def _process_image(img):
   img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY ) 
   img = cv2.resize(img, (75, 75), interpolation=cv2.INTER_AREA)
   img = img / 255.0
