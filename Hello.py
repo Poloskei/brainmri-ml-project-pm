@@ -64,6 +64,7 @@ if __name__ == "__main__":
 
     kerasmodel = load_models()
     img = __load_and_preprocess_custom_image()
-    st.write("image uploaded")
-    st.image(img)
-    st.write("keras: " +__predict_score(img,kerasmodel))
+    if img is not null:
+      st.write("image uploaded")
+      st.image(img)
+      st.write("keras: " +__predict_score(img,kerasmodel))
