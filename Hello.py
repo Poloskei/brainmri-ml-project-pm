@@ -41,7 +41,7 @@ def load_models():
   return model_keras
 
 def _process_image(img):
-  img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY ) 
+  #img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY ) 
   img = cv2.resize(img, (75, 75), interpolation=cv2.INTER_AREA)
   img = img / 255.0
   #img = load_img(image_path, color_mode = 'grayscale', target_size = (700, 700))
