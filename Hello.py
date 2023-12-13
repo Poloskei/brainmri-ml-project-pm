@@ -43,12 +43,14 @@ def load_models():
 
 def __load_and_preprocess_custom_image():
   img = st.file_uploader("upload an image of ur brain", type=['jpg','jpeg'], accept_multiple_files=False)
-  img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY ) 
-  img = cv2.resize(img, (75, 75), interpolation=cv2.INTER_AREA)
-  img = img / 255.0
-#  img = load_img(image_path, color_mode = 'grayscale', target_size = (700, 700))
+  if img is not None:
+    img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY ) 
+    img = cv2.resize(img, (75, 75), interpolation=cv2.INTER_AREA)
+    img = img / 255.0
+  #img = load_img(image_path, color_mode = 'grayscale', target_size = (700, 700))
   #img = img_to_array(img).astype('float32')/255
-  return img
+    return img
+  return None
 
 def __predict_score(image,model):
     image = __load_and_preprocess_custom_image(image)
