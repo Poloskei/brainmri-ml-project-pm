@@ -21,6 +21,7 @@ from sklearn.ensemble import RandomForestClassifier
 import joblib
 import fastbook
 from fastbook import *
+from PIL import Image, ImageOps
 
 from keras.models import load_model
 from keras.preprocessing.image import img_to_array, load_img, array_to_img
@@ -78,7 +79,7 @@ if __name__ == "__main__":
     st.image(img)
     uplpoaded_img = st.file_uploader("upload an image of ur brain", type=['jpg','jpeg'], accept_multiple_files=False)
     if uplpoaded_img is not None:
-       img = uplpoaded_img
+       img = Image.open(uplpoaded_img)
        img = img_to_array(img).astype('float32')
        st.write("image uploaded")
        st.image(img)
