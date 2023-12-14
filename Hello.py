@@ -41,8 +41,8 @@ def run():
 
 def load_models():
   model_keras = load_model('models/tumor87.h5', compile=False)
-  loaded_rf = joblib.load("brainforest.joblib")
-  learner = load_learner("fastai_export.pkl")
+  loaded_rf = joblib.load("models/brainforest.joblib")
+  learner = load_learner("models/fastai_export.pkl")
   return model_keras, loaded_rf, learner
 
 def _process_image(img):
