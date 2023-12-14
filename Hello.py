@@ -41,7 +41,7 @@ def run():
 
 def load_models():
   model_keras = load_model('models/tumor87.h5', compile=False)
-  loaded_rf = joblib.load("models/brainforest.joblib")
+  loaded_rf = joblib.load("models/brainforest.joblib",mmap_mode='r')
   learner = load_learner("models/fastai_export.pkl")
   return model_keras, loaded_rf, learner
 
