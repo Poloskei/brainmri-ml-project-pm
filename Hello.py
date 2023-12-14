@@ -62,6 +62,13 @@ def __predict(image,model):
     #score = __calculate_score(y_pred_class, y_pred_prob)
     return y_pred_class
 
+def _eval_image(img,keras,rf,fastai):
+  img = _process_image(img)
+  st.write("keras: ",__predict(img,keras))
+  st.write("random forest: ", rf.predict(img.reshape(1,-1)))
+  st.write("fastai: ", fastai.predict(img))
+
+
 if __name__ == "__main__":
     run()
     #st.sidebar.success("Select a demo above.")
@@ -75,6 +82,7 @@ if __name__ == "__main__":
        img = img_to_array(img).astype('float32')
        st.write("image uploaded")
        st.image(img)
+       _eval_image(img,kerasmodel,brainforest,learner)
     img = _process_image(img)
     st.write("keras: ",__predict(img,kerasmodel))
     st.write("random forest: ", brainforest.predict(img.reshape(1,-1)))
