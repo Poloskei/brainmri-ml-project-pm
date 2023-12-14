@@ -79,7 +79,7 @@ if __name__ == "__main__":
     st.image(img)
     uplpoaded_img = st.file_uploader("upload an image of ur brain", type=['jpg','jpeg'], accept_multiple_files=False)
     if uplpoaded_img is not None:
-       img = Image.open(uplpoaded_img)
+       img = uplpoaded_img.read()
        img = img_to_array(img).astype('float32')
        st.write("image uploaded")
        st.image(img)
