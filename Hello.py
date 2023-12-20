@@ -80,7 +80,7 @@ if __name__ == "__main__":
     #st.write("example image: ")
     #img = cv2.imread('Y1.jpg')
     #st.image(img)
-    uploaded_file = st.file_uploader("upload an image of ur brain", type=['jpg','jpeg'], accept_multiple_files=False)
+    uploaded_file = st.file_uploader("upload an image of ur brain", type=['jpg','jpeg','png'], accept_multiple_files=False)
     
     if not uploaded_file:
       st.write("no image uploaded")
