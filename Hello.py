@@ -92,6 +92,4 @@ if __name__ == "__main__":
     st.write("image uploaded")
     st.image(img)
     _eval_image(img,kerasmodel,brainforest,learner)
-
-    if uplpoaded_img is not None:
        
