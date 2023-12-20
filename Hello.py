@@ -64,10 +64,11 @@ def __predict(image,model):
     return y_pred_class
 
 def _eval_image(img,keras,rf,fastai):
+  st.write("fastai: ", fastai.predict(img))
   img = _process_image(img)
   st.write("keras: ",__predict(img,keras))
   st.write("random forest: ", rf.predict(img.reshape(1,-1)))
-  st.write("fastai: ", fastai.predict(img))
+  
 
 
 if __name__ == "__main__":
@@ -76,7 +77,7 @@ if __name__ == "__main__":
 
     kerasmodel, brainforest, learner = load_models()
 
-    st.write("example image: ")
+    #st.write("example image: ")
     #img = cv2.imread('Y1.jpg')
     #st.image(img)
     uploaded_file = st.file_uploader("upload an image of ur brain", type=['jpg','jpeg'], accept_multiple_files=False)
