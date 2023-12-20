@@ -79,17 +79,28 @@ if __name__ == "__main__":
     st.write("example image: ")
     #img = cv2.imread('Y1.jpg')
     #st.image(img)
-    uplpoaded_img = st.file_uploader("upload an image of ur brain", type=['jpg','jpeg'], accept_multiple_files=False)
+    uploaded_file = st.file_uploader("upload an image of ur brain", type=['jpg','jpeg'], accept_multiple_files=False)
     
-    if not uplpoaded_img:
-      st.write("upload an image to predict")
+    if not uploaded_file:
+      st.write("no image uploaded")
       st.stop()
 
     st.success("prediction of your image: ")   
-    
-    img = uplpoaded_img.read()
+
+    file_bytes = np.asarray(bytearray(uploaded_file.read()), dtype=np.uint8)
+    opencv_image = cv2.imdecode(file_bytes, 1)
+
+    # Now do something with the image! For example, let's display it:
+    st.image(opencv_image, channels="BGR")
+
+
+
+
+    #image = uploaded_file.read()
+    #img = st.image(image, caption='brain', use_column_width=True)
+
     #img = img_to_array(img).astype('float32')
     st.write("image uploaded")
-    st.image(img)
-    _eval_image(img,kerasmodel,brainforest,learner)
+    #st.image(img)
+    _eval_image(opencv_image,kerasmodel,brainforest,learner)
        
