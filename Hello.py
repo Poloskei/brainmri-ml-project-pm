@@ -88,7 +88,7 @@ if __name__ == "__main__":
     st.success("prediction of your image: ")   
     
     img = uplpoaded_img.read()
-    img = img_to_array(img).astype('float32')
+    #img = img_to_array(img).astype('float32')
     st.write("image uploaded")
     st.image(img)
     _eval_image(img,kerasmodel,brainforest,learner)
