@@ -36,7 +36,7 @@ def run():
         page_icon="🧠",
     )
 
-    st.write("brainss")
+    #st.write("brainss")
 
 
 
@@ -75,16 +75,23 @@ if __name__ == "__main__":
     #st.sidebar.success("Select a demo above.")
 
     kerasmodel, brainforest, learner = load_models()
-    img = cv2.imread('Y1.jpg')
-    st.image(img)
+
+    st.write("example image: ")
+    #img = cv2.imread('Y1.jpg')
+    #st.image(img)
     uplpoaded_img = st.file_uploader("upload an image of ur brain", type=['jpg','jpeg'], accept_multiple_files=False)
+    
+    if not uplpoaded_img:
+      st.write("upload an image to predict")
+      st.stop()
+
+    st.success("prediction of your image: ")   
+    
+    img = uplpoaded_img.read()
+    img = img_to_array(img).astype('float32')
+    st.write("image uploaded")
+    st.image(img)
+    _eval_image(img,kerasmodel,brainforest,learner)
+
     if uplpoaded_img is not None:
-       img = uplpoaded_img.read()
-       img = img_to_array(img).astype('float32')
-       st.write("image uploaded")
-       st.image(img)
-       _eval_image(img,kerasmodel,brainforest,learner)
-    img = _process_image(img)
-    st.write("keras: ",__predict(img,kerasmodel))
-    st.write("random forest: ", brainforest.predict(img.reshape(1,-1)))
-    st.write("fastai: ", learner.predict(img))
+       
